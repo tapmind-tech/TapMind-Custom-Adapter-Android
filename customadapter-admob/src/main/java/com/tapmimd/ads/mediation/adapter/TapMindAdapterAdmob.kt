@@ -92,7 +92,7 @@ class TapMindAdapterAdmob() : Adapter() {
             adType = "Banner",
             country = Locale.getDefault().country
         )
-        val data = SampleBannerCustomEventLoader.getInstance(adConfig, callback)
+        val data = AdmobBannerCustomEventLoader.getInstance(adConfig, callback)
         data.loadAdd()
     }
 
@@ -111,7 +111,7 @@ class TapMindAdapterAdmob() : Adapter() {
             adType = "Native",
             country = Locale.getDefault().country
         )
-        SampleNativeCustomEventLoader.getInstance(adConfig, callback).loadAd()
+        AdmobNativeCustomEventLoader.getInstance(adConfig, callback).loadAd()
     }
 
 
@@ -130,7 +130,7 @@ class TapMindAdapterAdmob() : Adapter() {
             adType = "Interstitial",
             country = Locale.getDefault().country
         )
-        val loader = SampleInterstitialCustomEventLoader(adConfig, callback)
+        val loader = AdmobInterstitialCustomEventLoader(adConfig, callback)
         loader.loadAd()
     }
 
@@ -167,7 +167,7 @@ class TapMindAdapterAdmob() : Adapter() {
             adType = "Rewarded",
             country = Locale.getDefault().country
         )
-        val data = SampleRewardedCustomEventLoader.getInstance(adConfig, callback)
+        val data = AdmobRewardedCustomEventLoader.getInstance(adConfig, callback)
         data.loadAd()
     }
 

@@ -20,7 +20,7 @@ class TapMindAdmobBannerReturned(
 }
 
 class TapMindAdmobInterstitialReturned(
-    private val loader: SampleInterstitialCustomEventLoader
+    private val loader: AdmobInterstitialCustomEventLoader
 ) : MediationInterstitialAd {
 
     var callback: MediationInterstitialAdCallback? = null
@@ -31,7 +31,7 @@ class TapMindAdmobInterstitialReturned(
 }
 
 class TapMindAdmobRewardedReturned(
-    private val loader: SampleRewardedCustomEventLoader
+    private val loader: AdmobRewardedCustomEventLoader
 ) : MediationRewardedAd {
 
     var callback: MediationRewardedAdCallback? = null
