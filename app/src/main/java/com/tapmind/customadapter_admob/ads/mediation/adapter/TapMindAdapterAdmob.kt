@@ -53,12 +53,9 @@ class TapMindAdapterAdmob() : Adapter() {
 //                initializationCallback.onInitializationSucceeded()
 //            }
 //        })
-
-
     }
 
     override fun getVersionInfo(): VersionInfo {
-        // Your adapter version (you define this)
         val major = 1
         val minor = 0
         val micro = 0
@@ -66,8 +63,7 @@ class TapMindAdapterAdmob() : Adapter() {
     }
 
     override fun getSDKVersionInfo(): VersionInfo {
-        // The SDK version of your internal TapMind SDK
-        val version = "1.2.3" // example: replace with your SDK version
+        val version = "1.2.3"
 
         val parts = version.split(".")
         val major = parts.getOrNull(0)?.toIntOrNull() ?: 1
@@ -113,7 +109,6 @@ class TapMindAdapterAdmob() : Adapter() {
         )
         AdmobNativeCustomEventLoader.getInstance(adConfig, callback).loadAd()
     }
-
 
     override fun loadInterstitialAd(
         adConfig: MediationInterstitialAdConfiguration,

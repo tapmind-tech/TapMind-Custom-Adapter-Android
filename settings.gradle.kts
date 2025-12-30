@@ -16,15 +16,6 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = uri ("https://jitpack.io")
-//            url = uri("https://maven.pkg.github.com/ravirising26/TapMindSdk")
-            credentials {
-                username = providers.gradleProperty("GITHUB_TOKEN").get()
-                password = ""
-            }
-        }
-
     }
 }
 
