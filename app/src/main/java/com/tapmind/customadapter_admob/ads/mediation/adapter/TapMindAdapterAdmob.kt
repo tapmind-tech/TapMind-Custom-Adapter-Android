@@ -164,6 +164,7 @@ class TapMindAdapterAdmob() : Adapter() {
         )
         val data = AdmobRewardedCustomEventLoader.getInstance(adConfig, callback)
         data.loadAd()
+        
     }
 
     override fun loadRewardedInterstitialAd(
