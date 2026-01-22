@@ -7,11 +7,11 @@ plugins {
 
 android {
     namespace = "com.tapmind"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.tapmind"
-        minSdk = 24
+        minSdk = 23
         targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
