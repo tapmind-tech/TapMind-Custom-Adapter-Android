@@ -13,15 +13,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
         android:text="Show Admob Banner" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/admobNative"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Show Admob Native" />
+        android:layout_marginTop="10dp"
+        android:text="Show Admob Native"
+        android:visibility="visible" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/admobInterstitial"
@@ -34,6 +34,12 @@
         android:id="@+id/admobReward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Show Admob Rewarded" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

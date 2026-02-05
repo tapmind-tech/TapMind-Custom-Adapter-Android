@@ -58,13 +58,14 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-//    implementation(project(":customadapter-ironsource"))
+    implementation(project(":customadapter-ironsource"))
     implementation("com.google.android.gms:play-services-ads:23.6.0")
     implementation("com.facebook.android:audience-network-sdk:6.8.0")
 
     implementation("com.applovin:applovin-sdk:13.5.0")
 
-    implementation("com.unity3d.ads-mediation:mediation-sdk:9.2.0")
+    implementation("com.unity3d.ads-mediation:mediation-sdk:9.3.0")
+    implementation("com.unity3d.ads:unity-ads:4.12.2")
 //    implementation("com.google.android.gms:play-services-appset:16.0.0")
 //    implementation("com.google.android.gms:play-services-ads-identifier:18.1.0")
 

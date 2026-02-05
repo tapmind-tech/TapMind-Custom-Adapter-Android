@@ -28,6 +28,7 @@ import com.tapmind.databinding.AdmobNativeAdBinding
 class AdTapMindShow : AppCompatActivity() {
 
     private lateinit var binding: ActivityAdTapMindShowBinding
+    private val ironsource: Ironsource = Ironsource()
     private val TAG = "APP@@@"
     val TAG1 = "Admob"
 
@@ -36,17 +37,46 @@ class AdTapMindShow : AppCompatActivity() {
         binding = ActivityAdTapMindShowBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adType = intent.getStringExtra("adType")
-
-        when (adType) {
-            "Banner" -> showAdmobBannerAd(this, binding.adContainer)
-            "Native" -> showAdmobNativeAd(this, binding.adContainer)
-            "Interstitial" -> showAdmobInterstitialAd(this)
-            "Reward" -> showAdmobRewardedAd(this)
-        }
+        val adType = intent.getStringExtra("adType").toString()
 
         binding.btnBack.setOnClickListener {
             finish()
+        }
+        ironSourceAd(adType)
+        adMobAd(adType)
+    }
+
+    private fun adMobAd(adType: String) {
+        when (adType) {
+//            "Banner" -> showAdmobBannerAd(this, binding.adContainer)
+            "Native" -> showAdmobNativeAd(this, binding.adContainer)
+//            "Interstitial" -> showAdmobInterstitialAd(this)
+//            "Reward" -> showAdmobRewardedAd(this)
+        }
+    }
+
+    private fun ironSourceAd(adType: String) {
+        when (adType) {
+            "Banner" -> ironsource.showIronsourceBannerAd(
+                this,
+                binding.progressBar,
+                binding.adContainer
+            )
+
+//            "Native" -> ironsource.showIronsourceNativeAd(
+//                this,
+//                binding.progressBar,
+//                binding.adContainer
+//            )
+
+            "Interstitial" -> {
+                ironsource.showIronsourceInterstitialAd(
+                    this,
+                    binding.progressBar
+                )
+            }
+
+            "Reward" -> ironsource.showIronsourceRewardedAd(this, binding.progressBar)
         }
     }
 
@@ -66,7 +96,6 @@ class AdTapMindShow : AppCompatActivity() {
                         Log.d(TAG, "Activity not valid")
                         return
                     }
-
 
                     ad.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdClicked() {
@@ -244,10 +273,8 @@ class AdTapMindShow : AppCompatActivity() {
     private fun populateNativeAdView(nativeAd: NativeAd, unifiedAdBinding: AdmobNativeAdBinding) {
         val nativeAdView = unifiedAdBinding.root
 
-        // Set the media view.
         nativeAdView.mediaView = unifiedAdBinding.adMedia
 
-        // Set other ad assets.
         nativeAdView.headlineView = unifiedAdBinding.adHeadline
         nativeAdView.bodyView = unifiedAdBinding.adBody
         nativeAdView.callToActionView = unifiedAdBinding.adCallToAction
@@ -257,7 +284,6 @@ class AdTapMindShow : AppCompatActivity() {
         nativeAdView.storeView = unifiedAdBinding.adStore
         nativeAdView.advertiserView = unifiedAdBinding.adAdvertiser
 
-        // The headline and media content are guaranteed to be in every UnifiedNativeAd.
         unifiedAdBinding.adHeadline.text = nativeAd.headline
 
         nativeAd.mediaContent?.let {
@@ -267,8 +293,6 @@ class AdTapMindShow : AppCompatActivity() {
             unifiedAdBinding.adMedia.visibility = View.GONE
         }
 
-        // These assets aren't guaranteed to be in every UnifiedNativeAd, so it's important to
-        // check before trying to display them.
         if (nativeAd.body == null) {
             unifiedAdBinding.adBody.visibility = View.INVISIBLE
         } else {

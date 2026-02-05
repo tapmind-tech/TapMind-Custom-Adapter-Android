@@ -28,7 +28,8 @@ import com.tapmind.databinding.AdmobNativeAdBinding
 class Admob {
 
     val TAG = "APP@@@"
-//    val TAG = "TapMindAdapterAdmob"
+
+    //    val TAG = "TapMindAdapterAdmob"
     val TAG1 = "Admob"
     var interstitialAd: InterstitialAd? = null
 
@@ -109,46 +110,52 @@ class Admob {
                         return
                     }
 
+                    Log.e(TAG, "onAdLoaded: $ad")
+
                     interstitialAd = ad
 
-                    interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
-                        override fun onAdClicked() {
-                            Log.d(TAG, "$TAG1 : showAdmobInterstitialAd onAdClicked : ")
-                            super.onAdClicked()
-                        }
+                    interstitialAd?.fullScreenContentCallback =
+                        object : FullScreenContentCallback() {
+                            override fun onAdClicked() {
+                                Log.d(TAG, "$TAG1 : showAdmobInterstitialAd onAdClicked : ")
+                                super.onAdClicked()
+                            }
 
-                        override fun onAdDismissedFullScreenContent() {
-                            super.onAdDismissedFullScreenContent()
-                            interstitialAd = null
-                            Log.d(
-                                TAG,
-                                "$TAG1 : showAdmobInterstitialAd onAdDismissedFullScreenContent : "
-                            )
-                        }
+                            override fun onAdDismissedFullScreenContent() {
+                                super.onAdDismissedFullScreenContent()
+                                interstitialAd = null
+                                Log.d(
+                                    TAG,
+                                    "$TAG1 : showAdmobInterstitialAd onAdDismissedFullScreenContent : "
+                                )
+                            }
 
-                        override fun onAdFailedToShowFullScreenContent(p0: AdError) {
-                            super.onAdFailedToShowFullScreenContent(p0)
-                            interstitialAd = null
-                            Log.d(
-                                TAG,
-                                "$TAG1 : showAdmobInterstitialAd onAdFailedToShowFullScreenContent : " + p0.code + " " + p0.message
-                            )
-                        }
+                            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                                super.onAdFailedToShowFullScreenContent(p0)
+                                interstitialAd = null
+                                Log.d(
+                                    TAG,
+                                    "$TAG1 : showAdmobInterstitialAd onAdFailedToShowFullScreenContent : " + p0.code + " " + p0.message
+                                )
+                            }
 
-                        override fun onAdImpression() {
-                            super.onAdImpression()
-                            Log.d(TAG, "$TAG1 : showAdmobInterstitialAd onAdImpression : ")
-                        }
+                            override fun onAdImpression() {
+                                super.onAdImpression()
+                                Log.d(TAG, "$TAG1 : showAdmobInterstitialAd onAdImpression : ")
+                            }
 
-                        override fun onAdShowedFullScreenContent() {
-                            super.onAdShowedFullScreenContent()
-                            Log.d(
-                                TAG,
-                                "$TAG1 : showAdmobInterstitialAd onAdShowedFullScreenContent : "
-                            )
+                            override fun onAdShowedFullScreenContent() {
+                                super.onAdShowedFullScreenContent()
+                                Log.d(
+                                    TAG,
+                                    "$TAG1 : showAdmobInterstitialAd onAdShowedFullScreenContent : "
+                                )
+                            }
                         }
-                    }
-                    Log.d(TAG, "Attempting to show ad, interstitialAd is null: ${interstitialAd == null}")
+                    Log.d(
+                        TAG,
+                        "Attempting to show ad, interstitialAd is null: ${interstitialAd == null}"
+                    )
                     Log.d(TAG, "About to show ad...")
                     try {
                         interstitialAd?.show(context)
@@ -290,7 +297,6 @@ class Admob {
                 }
             },
         )
-
     }
 
     fun showAdmobNativeAd(
@@ -298,7 +304,6 @@ class Admob {
         progressBar: ProgressBar,
         nativeAdContainer: FrameLayout
     ) {
-
         progressBar.visibility = View.VISIBLE
 
         val adLoader =
