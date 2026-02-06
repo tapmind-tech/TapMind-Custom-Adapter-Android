@@ -42,16 +42,16 @@ class AdTapMindShow : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
-        ironSourceAd(adType)
+//        ironSourceAd(adType)
         adMobAd(adType)
     }
 
     private fun adMobAd(adType: String) {
         when (adType) {
-//            "Banner" -> showAdmobBannerAd(this, binding.adContainer)
+            "Banner" -> showAdmobBannerAd(this, binding.adContainer)
             "Native" -> showAdmobNativeAd(this, binding.adContainer)
-//            "Interstitial" -> showAdmobInterstitialAd(this)
-//            "Reward" -> showAdmobRewardedAd(this)
+            "Interstitial" -> showAdmobInterstitialAd(this)
+            "Reward" -> showAdmobRewardedAd(this)
         }
     }
 
@@ -83,8 +83,8 @@ class AdTapMindShow : AppCompatActivity() {
     fun showAdmobInterstitialAd(context: Activity) {
         val adRequest = AdRequest.Builder().build()
 
-//        val adID = "ca-app-pub-7450680965442270/1478768049"
-        val adID = "ca-app-pub-3940256099942544/1033173712"
+        val adID = "ca-app-pub-7450680965442270/1478768049"
+//        val adID = "ca-app-pub-3940256099942544/1033173712"
 
         InterstitialAd.load(
             context, adID, adRequest,
@@ -126,6 +126,7 @@ class AdTapMindShow : AppCompatActivity() {
 
                         override fun onAdShowedFullScreenContent() {
                             super.onAdShowedFullScreenContent()
+                            binding.progressBar.visibility = View.GONE
                             Log.d(
                                 TAG,
                                 "$TAG1 : showAdmobInterstitialAd onAdShowedFullScreenContent : "
@@ -187,6 +188,7 @@ class AdTapMindShow : AppCompatActivity() {
 
                         override fun onAdShowedFullScreenContent() {
                             super.onAdShowedFullScreenContent()
+                            binding.progressBar.visibility = View.GONE
                             Log.d(TAG, "$TAG1 : showAdmobRewardAd onAdShowedFullScreenContent : ")
                         }
 
@@ -252,6 +254,7 @@ class AdTapMindShow : AppCompatActivity() {
 
                 override fun onAdLoaded() {
                     super.onAdLoaded()
+                    binding.progressBar.visibility = View.GONE
                     Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdLoaded")
                 }
 
@@ -267,7 +270,6 @@ class AdTapMindShow : AppCompatActivity() {
             }).withNativeAdOptions(NativeAdOptions.Builder().build()).build()
 
         adLoader.loadAd(AdRequest.Builder().build())
-
     }
 
     private fun populateNativeAdView(nativeAd: NativeAd, unifiedAdBinding: AdmobNativeAdBinding) {
@@ -374,6 +376,7 @@ class AdTapMindShow : AppCompatActivity() {
 
             override fun onAdLoaded() {
                 Log.d(TAG, "$TAG1 : showAdmobBannerAd onAdLoaded")
+                binding.progressBar.visibility = View.GONE
             }
 
             override fun onAdOpened() {

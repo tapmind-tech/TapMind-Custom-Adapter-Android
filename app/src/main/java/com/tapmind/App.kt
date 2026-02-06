@@ -31,34 +31,34 @@ class App : Application() {
             Settings.Secure.ANDROID_ID
         )
 
-        val initRequest = LevelPlayInitRequest.Builder(apiKey)
-            .withUserId(userId)
-            .build()
-        LevelPlay.init(this, initRequest, object : LevelPlayInitListener {
-            override fun onInitFailed(error: LevelPlayInitError) {
-                isIronSourceInitialized = false
-                Log.e("App@@@", "onInitFailed: IronSource")
-                Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(
-                        applicationContext,
-                        "IronSource init failed",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-
-            override fun onInitSuccess(configuration: LevelPlayConfiguration) {
-                isIronSourceInitialized = true
-                Log.e("App@@@", "onInitSuccess: IronSource")
-                Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(
-                        applicationContext,
-                        "IronSource initialized successfully",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        })
+//        val initRequest = LevelPlayInitRequest.Builder(apiKey)
+//            .withUserId(userId)
+//            .build()
+//        LevelPlay.init(this, initRequest, object : LevelPlayInitListener {
+//            override fun onInitFailed(error: LevelPlayInitError) {
+//                isIronSourceInitialized = false
+//                Log.e("App@@@", "onInitFailed: IronSource")
+//                Handler(Looper.getMainLooper()).post {
+//                    Toast.makeText(
+//                        applicationContext,
+//                        "IronSource init failed",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            }
+//
+//            override fun onInitSuccess(configuration: LevelPlayConfiguration) {
+//                isIronSourceInitialized = true
+//                Log.e("App@@@", "onInitSuccess: IronSource")
+//                Handler(Looper.getMainLooper()).post {
+//                    Toast.makeText(
+//                        applicationContext,
+//                        "IronSource initialized successfully",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            }
+//        })
         verifyCustomAdapter()
 
 //        Facebook().init(this)

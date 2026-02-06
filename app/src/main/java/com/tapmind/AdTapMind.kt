@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tapmind.databinding.ActivityAdTapMindBinding
 
@@ -18,7 +17,7 @@ class AdTapMind : AppCompatActivity() {
         setContentView(binding.root)
 
         clickListener()
-        checkInitAndEnableButtons()
+//        checkInitAndEnableButtons()
     }
 
     private fun clickListener() {
@@ -55,10 +54,10 @@ class AdTapMind : AppCompatActivity() {
     }
 
     private fun navigation(value: String) {
-        if (!App.isIronSourceInitialized) {
-            Toast.makeText(this, "IronSource not initialized yet", Toast.LENGTH_SHORT).show()
-            return
-        }
+//        if (!App.isIronSourceInitialized) {
+//            Toast.makeText(this, "IronSource not initialized yet", Toast.LENGTH_SHORT).show()
+//            return
+//        }
         val intent = Intent(this, AdTapMindShow::class.java)
         intent.putExtra("adType", value)
         startActivity(intent)
