@@ -272,6 +272,5 @@ class Ironsource {
 
         adContainer.removeAllViews()
         adContainer.addView(adLayout)
-
     }
 }

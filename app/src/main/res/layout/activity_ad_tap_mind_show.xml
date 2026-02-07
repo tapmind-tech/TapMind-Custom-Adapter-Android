@@ -14,12 +14,18 @@
         android:layout_margin="20dp"
         android:src="@drawable/back_button" />
 
-    <FrameLayout
-        android:id="@+id/adContainer"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"/>
+<!--    <FrameLayout-->
+<!--        android:id="@+id/adContainer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginTop="20dp"/>-->
 <!--        android:background="@color/cardview_shadow_start_color" />-->
+
+    <FrameLayout
+        android:id="@+id/adNativeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

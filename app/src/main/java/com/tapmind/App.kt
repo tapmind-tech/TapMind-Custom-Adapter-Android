@@ -25,11 +25,11 @@ class App : Application() {
         super.onCreate()
 
         Admob().init(this)
-        val apiKey = "2517ad13d"
-        val userId = Settings.Secure.getString(
-            contentResolver,
-            Settings.Secure.ANDROID_ID
-        )
+//        val apiKey = "2517ad13d"
+//        val userId = Settings.Secure.getString(
+//            contentResolver,
+//            Settings.Secure.ANDROID_ID
+//        )
 
 //        val initRequest = LevelPlayInitRequest.Builder(apiKey)
 //            .withUserId(userId)
@@ -59,7 +59,7 @@ class App : Application() {
 //                }
 //            }
 //        })
-        verifyCustomAdapter()
+//        verifyCustomAdapter()
 
 //        Facebook().init(this)
 //        init(this)

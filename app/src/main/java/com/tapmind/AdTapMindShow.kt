@@ -48,8 +48,8 @@ class AdTapMindShow : AppCompatActivity() {
 
     private fun adMobAd(adType: String) {
         when (adType) {
-            "Banner" -> showAdmobBannerAd(this, binding.adContainer)
-            "Native" -> showAdmobNativeAd(this, binding.adContainer)
+            "Banner" -> showAdmobBannerAd(this, binding.adNativeContainer)
+            "Native" -> showAdmobNativeAd(this, binding.adNativeContainer)
             "Interstitial" -> showAdmobInterstitialAd(this)
             "Reward" -> showAdmobRewardedAd(this)
         }
@@ -58,9 +58,7 @@ class AdTapMindShow : AppCompatActivity() {
     private fun ironSourceAd(adType: String) {
         when (adType) {
             "Banner" -> ironsource.showIronsourceBannerAd(
-                this,
-                binding.progressBar,
-                binding.adContainer
+                this, binding.progressBar, binding.adNativeContainer
             )
 
 //            "Native" -> ironsource.showIronsourceNativeAd(
@@ -71,8 +69,7 @@ class AdTapMindShow : AppCompatActivity() {
 
             "Interstitial" -> {
                 ironsource.showIronsourceInterstitialAd(
-                    this,
-                    binding.progressBar
+                    this, binding.progressBar
                 )
             }
 
@@ -84,7 +81,7 @@ class AdTapMindShow : AppCompatActivity() {
         val adRequest = AdRequest.Builder().build()
 
         val adID = "ca-app-pub-7450680965442270/1478768049"
-//        val adID = "ca-app-pub-3940256099942544/1033173712"
+//        val adID = "ca-app-pub-3940256099942544/1033173712"  // <= demo
 
         InterstitialAd.load(
             context, adID, adRequest,
@@ -159,7 +156,10 @@ class AdTapMindShow : AppCompatActivity() {
         adRequest.isTestDevice(context)
 
         RewardedAd.load(
-            context, "ca-app-pub-7450680965442270/2233446514", adRequest,
+            context,
+            "ca-app-pub-7450680965442270/2233446514",
+//            "ca-app-pub-3940256099942544/5224354917" // <= demo
+            adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdLoaded(ad: RewardedAd) {
                     Log.d(TAG, "$TAG1 : showAdmobRewardAd onAdLoaded")
@@ -220,54 +220,56 @@ class AdTapMindShow : AppCompatActivity() {
     fun showAdmobNativeAd(
         context: Context, nativeAdContainer: FrameLayout
     ) {
-        val adLoader = AdLoader.Builder(context, "ca-app-pub-7450680965442270/8599544313")
-            .forNativeAd { nativeAd ->
+        val adLoader = AdLoader.Builder(
+            context, "ca-app-pub-7450680965442270/8599544313"
+//            context, "ca-app-pub-3940256099942544/2247696110" // <= demo
+        ).forNativeAd { nativeAd ->
+            Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdLoaded")
+
+            nativeAdContainer.removeAllViews()
+            val inflater = LayoutInflater.from(context)
+            val adView = AdmobNativeAdBinding.inflate(inflater)
+            nativeAdContainer.addView(adView.root)
+            populateNativeAdView(nativeAd, adView)
+
+        }.withAdListener(object : AdListener() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.d(
+                    TAG, "$TAG1 : showAdmobNativeAd onAdFailedToLoad : " + adError.responseInfo
+                )
+            }
+
+            override fun onAdClicked() {
+                super.onAdClicked()
+                Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdClicked")
+            }
+
+            override fun onAdClosed() {
+                super.onAdClosed()
+                Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdClosed")
+            }
+
+            override fun onAdImpression() {
+                super.onAdImpression()
+                Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdImpression")
+            }
+
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+                binding.progressBar.visibility = View.GONE
                 Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdLoaded")
+            }
 
-                val inflater = LayoutInflater.from(context)
-                val adView = AdmobNativeAdBinding.inflate(inflater)
-                nativeAdContainer.removeAllViews()
-                nativeAdContainer.addView(adView.root)
-                populateNativeAdView(nativeAd, adView)
+            override fun onAdOpened() {
+                super.onAdOpened()
+                Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdOpened")
+            }
 
-            }.withAdListener(object : AdListener() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.d(
-                        TAG, "$TAG1 : showAdmobNativeAd onAdFailedToLoad : " + adError.responseInfo
-                    )
-                }
-
-                override fun onAdClicked() {
-                    super.onAdClicked()
-                    Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdClicked")
-                }
-
-                override fun onAdClosed() {
-                    super.onAdClosed()
-                    Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdClosed")
-                }
-
-                override fun onAdImpression() {
-                    super.onAdImpression()
-                    Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdImpression")
-                }
-
-                override fun onAdLoaded() {
-                    super.onAdLoaded()
-                    binding.progressBar.visibility = View.GONE
-                    Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdLoaded")
-                }
-
-                override fun onAdOpened() {
-                    super.onAdOpened()
-                    Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdOpened")
-                }
-
-                override fun onAdSwipeGestureClicked() {
-                    super.onAdSwipeGestureClicked()
-                    Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdSwipeGestureClicked")
-                }
-            }).withNativeAdOptions(NativeAdOptions.Builder().build()).build()
+            override fun onAdSwipeGestureClicked() {
+                super.onAdSwipeGestureClicked()
+                Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdSwipeGestureClicked")
+            }
+        }).withNativeAdOptions(NativeAdOptions.Builder().build()).build()
 
         adLoader.loadAd(AdRequest.Builder().build())
     }
@@ -275,8 +277,8 @@ class AdTapMindShow : AppCompatActivity() {
     private fun populateNativeAdView(nativeAd: NativeAd, unifiedAdBinding: AdmobNativeAdBinding) {
         val nativeAdView = unifiedAdBinding.root
 
+        // IMPORTANT: Assign ALL views including ad attribution
         nativeAdView.mediaView = unifiedAdBinding.adMedia
-
         nativeAdView.headlineView = unifiedAdBinding.adHeadline
         nativeAdView.bodyView = unifiedAdBinding.adBody
         nativeAdView.callToActionView = unifiedAdBinding.adCallToAction
@@ -286,64 +288,75 @@ class AdTapMindShow : AppCompatActivity() {
         nativeAdView.storeView = unifiedAdBinding.adStore
         nativeAdView.advertiserView = unifiedAdBinding.adAdvertiser
 
+        unifiedAdBinding.adAttribution.text = "Ad"
+        unifiedAdBinding.adAttribution.visibility = View.VISIBLE
         unifiedAdBinding.adHeadline.text = nativeAd.headline
 
+        // Media content
         nativeAd.mediaContent?.let {
             unifiedAdBinding.adMedia.mediaContent = it
             unifiedAdBinding.adMedia.visibility = View.VISIBLE
-        } ?: {
+        } ?: run {
             unifiedAdBinding.adMedia.visibility = View.GONE
         }
 
-        if (nativeAd.body == null) {
-            unifiedAdBinding.adBody.visibility = View.INVISIBLE
+        // Body
+        if (nativeAd.body != null) {
+            unifiedAdBinding.adBody.text = nativeAd.body
+            unifiedAdBinding.adBody.visibility = View.VISIBLE
         } else {
             unifiedAdBinding.adBody.visibility = View.GONE
-            unifiedAdBinding.adBody.text = nativeAd.body
         }
 
-        if (nativeAd.callToAction == null) {
-            unifiedAdBinding.adCallToAction.visibility = View.INVISIBLE
-        } else {
-            unifiedAdBinding.adCallToAction.visibility = View.VISIBLE
+        // Call to Action
+        if (nativeAd.callToAction != null) {
             unifiedAdBinding.adCallToAction.text = nativeAd.callToAction
+            unifiedAdBinding.adCallToAction.visibility = View.VISIBLE
+        } else {
+            unifiedAdBinding.adCallToAction.visibility = View.GONE
         }
 
-        if (nativeAd.icon == null) {
-            unifiedAdBinding.adAppIcon.visibility = View.GONE
-        } else {
-            unifiedAdBinding.adAppIcon.setImageDrawable(nativeAd.icon?.drawable)
+        // Icon
+        if (nativeAd.icon != null) {
+            unifiedAdBinding.adAppIcon.setImageDrawable(nativeAd.icon!!.drawable)
             unifiedAdBinding.adAppIcon.visibility = View.VISIBLE
+        } else {
+            unifiedAdBinding.adAppIcon.visibility = View.GONE
         }
 
-        if (nativeAd.price == null) {
-            unifiedAdBinding.adPrice.visibility = View.GONE
-        } else {
-            unifiedAdBinding.adPrice.visibility = View.GONE
+        // Price
+        if (nativeAd.price != null) {
             unifiedAdBinding.adPrice.text = nativeAd.price
+            unifiedAdBinding.adPrice.visibility = View.VISIBLE
+        } else {
+            unifiedAdBinding.adPrice.visibility = View.GONE
         }
 
-        if (nativeAd.store == null) {
-            unifiedAdBinding.adStore.visibility = View.INVISIBLE
-        } else {
-            unifiedAdBinding.adStore.visibility = View.VISIBLE
+        // Store
+        if (nativeAd.store != null) {
             unifiedAdBinding.adStore.text = nativeAd.store
+            unifiedAdBinding.adStore.visibility = View.VISIBLE
+        } else {
+            unifiedAdBinding.adStore.visibility = View.GONE
         }
 
-        if (nativeAd.starRating == null) {
-            unifiedAdBinding.adStars.visibility = View.INVISIBLE
-        } else {
+        // Star Rating
+        if (nativeAd.starRating != null) {
             unifiedAdBinding.adStars.rating = nativeAd.starRating!!.toFloat()
             unifiedAdBinding.adStars.visibility = View.VISIBLE
+        } else {
+            unifiedAdBinding.adStars.visibility = View.GONE
         }
 
-        if (nativeAd.advertiser == null) {
-            unifiedAdBinding.adAdvertiser.visibility = View.INVISIBLE
-        } else {
+        // Advertiser
+        if (nativeAd.advertiser != null) {
             unifiedAdBinding.adAdvertiser.text = nativeAd.advertiser
             unifiedAdBinding.adAdvertiser.visibility = View.VISIBLE
+        } else {
+            unifiedAdBinding.adAdvertiser.visibility = View.GONE
         }
 
+        // ⚠️ CRITICAL: This must be called LAST after all views are populated
         nativeAdView.setNativeAd(nativeAd)
     }
 
@@ -352,6 +365,7 @@ class AdTapMindShow : AppCompatActivity() {
         val adView = AdView(context)
         adView.adUnitId = "ca-app-pub-7450680965442270/1794874535"
 //        adView.adUnitId = "ca-app-pub-3940256099942544/9214589741"
+//        adView.adUnitId = "ca-app-pub-3940256099942544/6300978111" // <= demo
         adView.setAdSize(AdSize.BANNER)
         adContainer.removeAllViews()
         adContainer.addView(adView)
