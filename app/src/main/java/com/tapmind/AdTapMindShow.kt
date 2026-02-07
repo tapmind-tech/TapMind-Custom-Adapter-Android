@@ -287,12 +287,10 @@ class AdTapMindShow : AppCompatActivity() {
         nativeAdView.starRatingView = unifiedAdBinding.adStars
         nativeAdView.storeView = unifiedAdBinding.adStore
         nativeAdView.advertiserView = unifiedAdBinding.adAdvertiser
-
         unifiedAdBinding.adAttribution.text = "Ad"
         unifiedAdBinding.adAttribution.visibility = View.VISIBLE
         unifiedAdBinding.adHeadline.text = nativeAd.headline
 
-        // Media content
         nativeAd.mediaContent?.let {
             unifiedAdBinding.adMedia.mediaContent = it
             unifiedAdBinding.adMedia.visibility = View.VISIBLE

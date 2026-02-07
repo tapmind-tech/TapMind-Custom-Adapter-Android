@@ -16,16 +16,14 @@
             android:id="@+id/ad_attribution"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="15dp"
+            android:minHeight="15dp"
             android:text="Ad"
-            android:textSize="10sp"
+            android:textSize="12sp"
+            android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:background="#FFCC00"
-            android:paddingHorizontal="6dp"
-            android:paddingVertical="2dp"
-            android:layout_marginBottom="6dp"
-            android:clickable="false"
-            android:focusable="false"/>
-
+            android:background="#FF9800"
+            android:padding="4dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
