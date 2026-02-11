@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tapmind.databinding.ActivityAdTapMindBinding
 
@@ -38,20 +39,21 @@ class AdTapMind : AppCompatActivity() {
         }
     }
 
-    private fun checkInitAndEnableButtons() {
-        val handler = Handler(Looper.getMainLooper())
-        handler.post(object : Runnable {
-            override fun run() {
-                if (App.isIronSourceInitialized) {
-                    binding.progressBar.visibility = View.GONE
-//                    navigation("Banner")
-                } else {
-                    binding.progressBar.visibility = View.VISIBLE
-                    handler.postDelayed(this, 300)
-                }
-            }
-        })
-    }
+//    private fun checkInitAndEnableButtons() {
+//        val handler = Handler(Looper.getMainLooper())
+//        handler.post(object : Runnable {
+//            override fun run() {
+//                if (App.isIronSourceInitialized) {
+//                    binding.progressBar.visibility = View.GONE
+//                    binding.admobNative.visibility = View.GONE
+//                } else {
+//                    binding.progressBar.visibility = View.VISIBLE
+////                    binding.admobNative.visibility = View.VISIBLE
+//                    handler.postDelayed(this, 300)
+//                }
+//            }
+//        })
+//    }
 
     private fun navigation(value: String) {
 //        if (!App.isIronSourceInitialized) {

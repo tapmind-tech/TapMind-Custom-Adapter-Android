@@ -47,8 +47,10 @@ class AdTapMindShow : AppCompatActivity() {
     }
 
     private fun adMobAd(adType: String) {
+        val bannerAdId = "ca-app-pub-7450680965442270/1794874535"
+//        val bannerAdId = "ca-app-pub-3940256099942544/6300978111" // <= demo
         when (adType) {
-            "Banner" -> showAdmobBannerAd(this, binding.adNativeContainer)
+            "Banner" -> showAdmobBannerAd(this, binding.adNativeContainer, bannerAdId)
             "Native" -> showAdmobNativeAd(this, binding.adNativeContainer)
             "Interstitial" -> showAdmobInterstitialAd(this)
             "Reward" -> showAdmobRewardedAd(this)
@@ -287,9 +289,16 @@ class AdTapMindShow : AppCompatActivity() {
         nativeAdView.starRatingView = unifiedAdBinding.adStars
         nativeAdView.storeView = unifiedAdBinding.adStore
         nativeAdView.advertiserView = unifiedAdBinding.adAdvertiser
-        unifiedAdBinding.adAttribution.text = "Ad"
-        unifiedAdBinding.adAttribution.visibility = View.VISIBLE
+//        unifiedAdBinding.adAttribution.text = "Ad"
+//        unifiedAdBinding.adAttribution.visibility = View.VISIBLE
         unifiedAdBinding.adHeadline.text = nativeAd.headline
+
+        if (nativeAd.adChoicesInfo != null) {
+            unifiedAdBinding.adChoices.visibility = View.VISIBLE
+            unifiedAdBinding.adChoices.text = nativeAd.adChoicesInfo?.text
+        } else {
+            unifiedAdBinding.adChoices.visibility = View.GONE
+        }
 
         nativeAd.mediaContent?.let {
             unifiedAdBinding.adMedia.mediaContent = it
@@ -354,16 +363,13 @@ class AdTapMindShow : AppCompatActivity() {
             unifiedAdBinding.adAdvertiser.visibility = View.GONE
         }
 
-        // ⚠️ CRITICAL: This must be called LAST after all views are populated
         nativeAdView.setNativeAd(nativeAd)
     }
 
-    fun showAdmobBannerAd(context: Context, adContainer: FrameLayout) {
+    fun showAdmobBannerAd(context: Context, adContainer: FrameLayout, adUnitId: String) {
 
         val adView = AdView(context)
-        adView.adUnitId = "ca-app-pub-7450680965442270/1794874535"
-//        adView.adUnitId = "ca-app-pub-3940256099942544/9214589741"
-//        adView.adUnitId = "ca-app-pub-3940256099942544/6300978111" // <= demo
+        adView.adUnitId = adUnitId
         adView.setAdSize(AdSize.BANNER)
         adContainer.removeAllViews()
         adContainer.addView(adView)
