@@ -1,11 +1,14 @@
 package com.tapmind
 
 import android.app.Application
+import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.unity3d.mediation.LevelPlay
 import com.unity3d.mediation.LevelPlayConfiguration
 import com.unity3d.mediation.LevelPlayInitError
@@ -24,42 +27,48 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Admob().init(this)
-//        val apiKey = "2517ad13d"
-//        val userId = Settings.Secure.getString(
-//            contentResolver,
-//            Settings.Secure.ANDROID_ID
-//        )
+//        Admob().init(this)
+//        val context: Context = this
+//        MobileAds.initialize(context) { status ->
+//            for ((adapter, state) in status.adapterStatusMap) {
+//                Log.d(TAG, "Adapter: $adapter, status: ${state.description}")
+//            }
+//        }
+        val apiKey = "2517ad13d"
+        val userId = Settings.Secure.getString(
+            contentResolver,
+            Settings.Secure.ANDROID_ID
+        )
 
-//        val initRequest = LevelPlayInitRequest.Builder(apiKey)
-//            .withUserId(userId)
-//            .build()
-//        LevelPlay.init(this, initRequest, object : LevelPlayInitListener {
-//            override fun onInitFailed(error: LevelPlayInitError) {
-//                isIronSourceInitialized = false
-//                Log.e("App@@@", "onInitFailed: IronSource")
-//                Handler(Looper.getMainLooper()).post {
-//                    Toast.makeText(
-//                        applicationContext,
-//                        "IronSource init failed",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//
-//            override fun onInitSuccess(configuration: LevelPlayConfiguration) {
-//                isIronSourceInitialized = true
-//                Log.e("App@@@", "onInitSuccess: IronSource")
-//                Handler(Looper.getMainLooper()).post {
-//                    Toast.makeText(
-//                        applicationContext,
-//                        "IronSource initialized successfully",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//        })
-//        verifyCustomAdapter()
+        val initRequest = LevelPlayInitRequest.Builder(apiKey)
+            .withUserId(userId)
+            .build()
+        LevelPlay.init(this, initRequest, object : LevelPlayInitListener {
+            override fun onInitFailed(error: LevelPlayInitError) {
+                isIronSourceInitialized = false
+                Log.e(TAG, "onInitFailed: IronSource")
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(
+                        applicationContext,
+                        "IronSource init failed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onInitSuccess(configuration: LevelPlayConfiguration) {
+                isIronSourceInitialized = true
+                Log.e(TAG, "onInitSuccess: IronSource")
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(
+                        applicationContext,
+                        "IronSource initialized successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
+        verifyCustomAdapter()
 
 //        Facebook().init(this)
 //        init(this)

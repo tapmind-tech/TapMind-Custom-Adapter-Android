@@ -16,6 +16,7 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.gms.ads.appopen.AppOpenAd
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
@@ -34,6 +35,11 @@ class Admob {
     var interstitialAd: InterstitialAd? = null
 
     fun init(context: Context) {
+        val requestConfig = RequestConfiguration.Builder()
+            .setTestDeviceIds(listOf("50F31F822A7EFC9B3784DB2124C73C03"))
+            .build()
+        MobileAds.setRequestConfiguration(requestConfig)
+
         MobileAds.initialize(context) {
             val statusMap = it.adapterStatusMap
             for ((adapterClass, status) in statusMap) {
@@ -47,7 +53,6 @@ class Admob {
     }
 
     fun showAdmobBannerAd(context: Context, progressBar: ProgressBar, adContainer: FrameLayout) {
-
         progressBar.visibility = View.VISIBLE
 
         val adView = AdView(context)
