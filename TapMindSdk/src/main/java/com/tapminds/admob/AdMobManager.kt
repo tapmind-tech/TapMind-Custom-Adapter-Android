@@ -1524,133 +1524,133 @@ class AdMobManager {
 //            }
 //
 //            val adapter = sortedAdapters[index]
-            val adUnitId = adapter.adUnitId.toString()
+        val adUnitId = adapter.adUnitId.toString()
 //            val adUnitId = "/6499/example/native"
 
-            val isGAM = adapter.partner.equals("GAM", ignoreCase = true)
+        val isGAM = adapter.partner.equals("GAM", ignoreCase = true)
 
-            Log.d(
-                TAG,
-                "Native Waterfall → priority=${adapter.priority}, partner=${adapter.partner}, adUnitId=$adUnitId"
+        Log.d(
+            TAG,
+            "Native Waterfall → priority=${adapter.priority}, partner=${adapter.partner}, adUnitId=$adUnitId"
+        )
+
+        val adRequest = if (isGAM) {
+            com.google.android.gms.ads.admanager.AdManagerAdRequest.Builder()
+                .addCustomTargeting("placement", adData.placementId.toString())
+                .build()
+        } else {
+            createAdRequestWithParameters(
+                isBiddingAd,
+                TapMindAdFormat.NATIVE,
+                parameters,
+                activity
             )
+        }
 
-            val adRequest = if (isGAM) {
-                com.google.android.gms.ads.admanager.AdManagerAdRequest.Builder()
-                    .addCustomTargeting("placement", adData.placementId.toString())
-                    .build()
-            } else {
-                createAdRequestWithParameters(
-                    isBiddingAd,
-                    TapMindAdFormat.NATIVE,
-                    parameters,
-                    activity
+        val nativeAdOptionsBuilder = NativeAdOptions.Builder()
+            .setAdChoicesPlacement(getAdChoicesPlacement(parameters))
+
+        val template = BundleUtils.getString(
+            "template",
+            "",
+            parameters.getServerParameters()
+        )
+
+        nativeAdOptionsBuilder.setRequestMultipleImages(
+            template?.contains("medium") == true
+        )
+
+        val nativeAdListener = object : NativeAdListener(
+            parameters,
+            activity,
+            listener,
+            adData,
+            adapter.adapterId.toString(),
+            adapter.partner.toString(),
+            nativeAd?.responseInfo?.responseId,
+            adapterName
+        ) {
+
+            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                Log.w(
+                    TAG,
+                    "Native failed at priority=${adapter.priority}, error=${loadAdError.code}"
                 )
+                apiUtils.callImpressionRequestAPI(
+                    adData.appId.toString(),
+                    adapter.adapterId.toString(),
+                    adData.placementId.toString(),
+                    "Native",
+                    "onAdFailedToLoad",
+                    loadAdError.message,
+                    adapter.partner.toString(),
+                    "SUCCESS",
+                    adData.requestId.toString(),
+                    adData.versionId.toString(),
+                    nativeAd?.responseInfo?.responseId.toString(),
+                    adapterName
+                )
+                listener.onNativeAdLoadFailed(
+                    TapMindAdapterError(
+                        TapMindAdapterError.ERROR_CODE_NO_FILL,
+                        loadAdError.message
+                    )
+                )
+//                    loadAt(index + 1)
             }
 
-            val nativeAdOptionsBuilder = NativeAdOptions.Builder()
-                .setAdChoicesPlacement(getAdChoicesPlacement(parameters))
+            override fun onNativeAdLoaded(nativeAd: NativeAd) {
+                Log.d(TAG, "Native loaded at priority=${adapter.priority}")
+                super.onNativeAdLoaded(nativeAd)
+                loadedNativeAd = nativeAd
 
-            val template = BundleUtils.getString(
-                "template",
-                "",
-                parameters.getServerParameters()
-            )
-
-            nativeAdOptionsBuilder.setRequestMultipleImages(
-                template?.contains("medium") == true
-            )
-
-            val nativeAdListener = object : NativeAdListener(
-                parameters,
-                activity,
-                listener,
-                adData,
-                adapter.adapterId.toString(),
-                adapter.partner.toString(),
-                nativeAd?.responseInfo?.responseId,
-                adapterName
-            ) {
-
-                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                    Log.w(
-                        TAG,
-                        "Native failed at priority=${adapter.priority}, error=${loadAdError.code}"
-                    )
-                    apiUtils.callImpressionRequestAPI(
-                        adData.appId.toString(),
-                        adapter.adapterId.toString(),
-                        adData.placementId.toString(),
-                        "Native",
-                        "onAdFailedToLoad",
-                        loadAdError.message,
-                        adapter.partner.toString(),
-                        "SUCCESS",
-                        adData.requestId.toString(),
-                        adData.versionId.toString(),
-                        nativeAd?.responseInfo?.responseId.toString(),
-                        adapterName
-                    )
-                    listener.onNativeAdLoadFailed(
-                        TapMindAdapterError(
-                            TapMindAdapterError.ERROR_CODE_NO_FILL,
-                            loadAdError.message
-                        )
-                    )
-//                    loadAt(index + 1)
-                }
-
-                override fun onNativeAdLoaded(nativeAd: NativeAd) {
-                    Log.d(TAG, "Native loaded at priority=${adapter.priority}")
-                    super.onNativeAdLoaded(nativeAd)
-                    loadedNativeAd = nativeAd
-
-                    nativeAd.setOnPaidEventListener { adValue ->
-                        val valueMicros = adValue.valueMicros
-                        Log.e("TapMindAdapterAdmob", "valueMicros: $valueMicros")
+                nativeAd.setOnPaidEventListener { adValue ->
+                    val valueMicros = adValue.valueMicros
+                    Log.e("TapMindAdapterAdmob", "valueMicros: $valueMicros")
 
 //                        if (valueMicros != 0L) {
-                        apiUtils.callImpressionRequestAPI(
-                            adData.appId.toString(),
-                            adapter.adapterId.toString(),
-                            adData.placementId.toString(),
-                            "Banner",
-                            "revenue",
-                            "",
-                            adapter.partner.toString(),
-                            "SUCCESS",
-                            adData.requestId.toString(),
-                            adData.versionId.toString(),
-                            nativeAd.responseInfo?.responseId.toString(),
-                            adapterName,
-                            valueMicros
-                        )
-//                        }
-                    }
-
                     apiUtils.callImpressionRequestAPI(
                         adData.appId.toString(),
                         adapter.adapterId.toString(),
                         adData.placementId.toString(),
-                        "Native",
-                        "onNativeAdLoaded",
+                        "Banner",
+                        "revenue",
                         "",
                         adapter.partner.toString(),
                         "SUCCESS",
                         adData.requestId.toString(),
                         adData.versionId.toString(),
                         nativeAd.responseInfo?.responseId.toString(),
-                        adapterName
+                        adapterName,
+                        valueMicros
                     )
+//                        }
                 }
+
+                apiUtils.callImpressionRequestAPI(
+                    adData.appId.toString(),
+                    adapter.adapterId.toString(),
+                    adData.placementId.toString(),
+                    "Native",
+                    "onNativeAdLoaded",
+                    "",
+                    adapter.partner.toString(),
+                    "SUCCESS",
+                    adData.requestId.toString(),
+                    adData.versionId.toString(),
+                    nativeAd.responseInfo?.responseId.toString(),
+                    adapterName
+                )
             }
+        }
 
-            val adLoader = AdLoader.Builder(activity, adUnitId)
-                .withNativeAdOptions(nativeAdOptionsBuilder.build())
-                .forNativeAd(nativeAdListener)
-                .withAdListener(nativeAdListener)
-                .build()
+        val adLoader = AdLoader.Builder(activity, adUnitId)
+            .withNativeAdOptions(nativeAdOptionsBuilder.build())
+            .forNativeAd(nativeAdListener)
+            .withAdListener(nativeAdListener)
+            .build()
 
-            adLoader.loadAd(adRequest)
+        adLoader.loadAd(adRequest)
 //        }
 //
 //        loadAt(0)

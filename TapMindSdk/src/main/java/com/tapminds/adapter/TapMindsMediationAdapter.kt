@@ -213,10 +213,11 @@ class TapMindsMediationAdapter private constructor() : TapMindMediationAdapterBa
             val current = adapters[index]
             val networkListener = object : TapMindAdViewAdapterListener {
                 override fun onAdViewAdLoaded(view: View) {
-
+                    listener.onAdViewAdLoaded(view)
                 }
 
                 override fun onAdViewAdLoaded(view: View, bundle: Bundle?) {
+                    listener.onAdViewAdLoaded(view, bundle)
                 }
 
                 override fun onAdViewAdLoadFailed(error: TapMindAdapterError) {
@@ -225,42 +226,54 @@ class TapMindsMediationAdapter private constructor() : TapMindMediationAdapterBa
                 }
 
                 override fun onAdViewAdDisplayed() {
+                    listener.onAdViewAdDisplayed()
                 }
 
                 override fun onAdViewAdDisplayed(bundle: Bundle?) {
+                    listener.onAdViewAdDisplayed(bundle)
                 }
 
                 override fun onAdViewAdDisplayFailed(error: TapMindAdapterError) {
+                    listener.onAdViewAdLoadFailed(error)
                 }
 
                 override fun onAdViewAdDisplayFailed(
                     error: TapMindAdapterError,
                     bundle: Bundle?
                 ) {
+                    listener.onAdViewAdDisplayFailed(error, bundle)
                 }
 
                 override fun onAdViewAdClicked() {
+                    listener.onAdViewAdClicked()
                 }
 
                 override fun onAdViewAdClicked(bundle: Bundle?) {
+                    listener.onAdViewAdClicked(bundle)
                 }
 
                 override fun onAdViewAdHidden() {
+                    listener.onAdViewAdHidden()
                 }
 
                 override fun onAdViewAdHidden(bundle: Bundle?) {
+                    listener.onAdViewAdHidden(bundle)
                 }
 
                 override fun onAdViewAdExpanded() {
+                    listener.onAdViewAdExpanded()
                 }
 
                 override fun onAdViewAdExpanded(bundle: Bundle?) {
+                    listener.onAdViewAdExpanded(bundle)
                 }
 
                 override fun onAdViewAdCollapsed() {
+                    listener.onAdViewAdCollapsed()
                 }
 
                 override fun onAdViewAdCollapsed(bundle: Bundle?) {
+                    listener.onAdViewAdCollapsed(bundle)
                 }
 
             }
@@ -357,9 +370,11 @@ class TapMindsMediationAdapter private constructor() : TapMindMediationAdapterBa
 
             val networkListener = object : TapMindInterstitialAdapterListener {
                 override fun onInterstitialAdLoaded() {
+                    callback.onInterstitialAdLoaded()
                 }
 
                 override fun onInterstitialAdLoaded(bundle: Bundle?) {
+                    callback.onInterstitialAdLoaded(bundle)
                 }
 
                 override fun onInterstitialAdLoadFailed(tapMindAdapterError: TapMindAdapterError?) {
@@ -371,30 +386,38 @@ class TapMindsMediationAdapter private constructor() : TapMindMediationAdapterBa
                 }
 
                 override fun onInterstitialAdDisplayed() {
+                    callback.onInterstitialAdDisplayed()
                 }
 
                 override fun onInterstitialAdDisplayed(bundle: Bundle?) {
+                    callback.onInterstitialAdDisplayed(bundle)
                 }
 
                 override fun onInterstitialAdClicked() {
+                    callback.onInterstitialAdClicked()
                 }
 
                 override fun onInterstitialAdClicked(bundle: Bundle?) {
+                    callback.onInterstitialAdClicked(bundle)
                 }
 
                 override fun onInterstitialAdHidden() {
+                    callback.onInterstitialAdHidden()
                 }
 
                 override fun onInterstitialAdHidden(bundle: Bundle?) {
+                    callback.onInterstitialAdHidden(bundle)
                 }
 
                 override fun onInterstitialAdDisplayFailed(tapMindAdapterError: TapMindAdapterError?) {
+                    callback.onInterstitialAdDisplayFailed(tapMindAdapterError)
                 }
 
                 override fun onInterstitialAdDisplayFailed(
                     tapMindAdapterError: TapMindAdapterError?,
                     bundle: Bundle?
                 ) {
+                    callback.onInterstitialAdDisplayFailed(tapMindAdapterError, bundle)
                 }
             }
 
@@ -462,10 +485,11 @@ class TapMindsMediationAdapter private constructor() : TapMindMediationAdapterBa
                 val current = adapters[index]
                 val networkListener = object : TapMindRewardedAdapterListener {
                     override fun onRewardedAdLoaded() {
-
+                        callback.onRewardedAdLoaded()
                     }
 
                     override fun onRewardedAdLoaded(bundle: Bundle?) {
+                        callback.onRewardedAdLoaded(bundle)
                     }
 
                     override fun onRewardedAdLoadFailed(tapMindAdapterError: TapMindAdapterError) {
@@ -474,39 +498,49 @@ class TapMindsMediationAdapter private constructor() : TapMindMediationAdapterBa
                     }
 
                     override fun onRewardedAdDisplayed() {
+                        callback.onRewardedAdDisplayed()
                     }
 
                     override fun onRewardedAdDisplayed(bundle: Bundle) {
+                        callback.onRewardedAdDisplayed(bundle)
                     }
 
                     override fun onRewardedAdDisplayFailed(tapMindAdapterError: TapMindAdapterError?) {
+                        callback.onRewardedAdDisplayFailed(tapMindAdapterError)
                     }
 
                     override fun onRewardedAdDisplayFailed(
                         tapMindAdapterError: TapMindAdapterError?,
                         bundle: Bundle?
                     ) {
+                        callback.onRewardedAdDisplayFailed(tapMindAdapterError, bundle)
                     }
 
                     override fun onRewardedAdClicked() {
+                        callback.onRewardedAdClicked()
                     }
 
                     override fun onRewardedAdClicked(bundle: Bundle?) {
+                        callback.onRewardedAdClicked(bundle)
                     }
 
                     override fun onRewardedAdHidden() {
+                        callback.onRewardedAdHidden()
                     }
 
                     override fun onRewardedAdHidden(bundle: Bundle?) {
+                        callback.onRewardedAdHidden(bundle)
                     }
 
                     override fun onUserRewarded(tapMindReward: TapMindReward) {
+                        callback.onUserRewarded(tapMindReward)
                     }
 
                     override fun onUserRewarded(
                         tapMindReward: TapMindReward?,
                         bundle: Bundle?
                     ) {
+                        callback.onUserRewarded(tapMindReward, bundle)
                     }
 
                 }
@@ -572,11 +606,12 @@ class TapMindsMediationAdapter private constructor() : TapMindMediationAdapterBa
             }
             val current = adapters[index]
             val networkListener = object : TapMindNativeAdAdapterListener {
+
                 override fun onNativeAdLoaded(
                     var1: TapMindNativeAd?,
                     var2: Bundle?
                 ) {
-
+                    var3?.onNativeAdLoaded(var1, var2)
                 }
 
                 override fun onNativeAdLoadFailed(tapMindAdapterError: TapMindAdapterError) {
@@ -585,12 +620,15 @@ class TapMindsMediationAdapter private constructor() : TapMindMediationAdapterBa
                 }
 
                 override fun onNativeAdDisplayed(bundle: Bundle?) {
+                    var3?.onNativeAdDisplayed(bundle)
                 }
 
                 override fun onNativeAdClicked() {
+                    var3?.onNativeAdClicked()
                 }
 
                 override fun onNativeAdClicked(var1: Bundle?) {
+                    var3?.onNativeAdClicked(var1)
                 }
             }
             when (current.partner) {
