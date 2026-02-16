@@ -93,7 +93,7 @@ class AdmobNativeCustomEventLoader(
         }
 
         TapMindsMediationAdapter.getInstance().loadNativeAd(
-            request, activity,
+            request, activity,0,
             object : TapMindNativeAdAdapterListener {
 
                 override fun onNativeAdLoaded(var1: TapMindNativeAd?, var2: Bundle?) {

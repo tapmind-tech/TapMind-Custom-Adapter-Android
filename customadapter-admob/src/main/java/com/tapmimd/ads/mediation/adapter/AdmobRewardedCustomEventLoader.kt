@@ -189,7 +189,7 @@ class AdmobRewardedCustomEventLoader(
         }
 
         TapMindsMediationAdapter.getInstance()
-            .loadRewardedAd(request!!, adConfig.context, tapMindRewardedAdapterListener!!)
+            .loadRewardedAd(request!!, adConfig.context, 0,tapMindRewardedAdapterListener!!)
 
     }
 

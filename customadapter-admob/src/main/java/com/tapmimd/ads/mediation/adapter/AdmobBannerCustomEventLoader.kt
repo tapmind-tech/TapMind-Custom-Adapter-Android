@@ -101,6 +101,7 @@ class AdmobBannerCustomEventLoader(
             request,
             TapMindAdFormat.BANNER,
             adConfig.context,
+            0,
             object : TapMindAdViewAdapterListener {
                 override fun onAdViewAdLoaded(view: View) {
                     if (view.parent != null) {

@@ -201,7 +201,12 @@ class AdmobInterstitialCustomEventLoader(
         }
 
         TapMindsMediationAdapter.getInstance()
-            .loadInterstitialAd(request!!, adConfig.context, tapMindInterstitialAdapterListener!!)
+            .loadInterstitialAd(
+                request!!,
+                adConfig.context,
+                0,
+                tapMindInterstitialAdapterListener!!
+            )
     }
 
     fun showAd(context: Context) {
