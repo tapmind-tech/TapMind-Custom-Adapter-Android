@@ -42,16 +42,28 @@ class AdTapMindShow : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
-//        ironSourceAd(adType)
-        adMobAd(adType)
+        ironSourceAd(adType)
+//        adMobAd(adType)
     }
 
     private fun adMobAd(adType: String) {
+        val bannerAdId = "ca-app-pub-7450680965442270/1794874535"
+//        val bannerAdId = "ca-app-pub-3940256099942544/6300978111" // <= demo
+
+        val nativeAdId = "ca-app-pub-7450680965442270/8599544313"
+//        val nativeAdId = "ca-app-pub-3940256099942544/2247696110" // <= demo
+
+        val interstitialAdID = "ca-app-pub-7450680965442270/1478768049"
+//        val interstitialAdID = "ca-app-pub-3940256099942544/1033173712"  // <= demo
+
+        val rewardedAdId = "ca-app-pub-7450680965442270/2233446514"
+//        val rewardedAdId = "ca-app-pub-3940256099942544/5224354917" // <= demo
+
         when (adType) {
-            "Banner" -> showAdmobBannerAd(this, binding.adNativeContainer)
-            "Native" -> showAdmobNativeAd(this, binding.adNativeContainer)
-            "Interstitial" -> showAdmobInterstitialAd(this)
-            "Reward" -> showAdmobRewardedAd(this)
+            "Banner" -> showAdmobBannerAd(this, binding.adNativeContainer, bannerAdId)
+            "Native" -> showAdmobNativeAd(this, binding.adNativeContainer, nativeAdId)
+            "Interstitial" -> showAdmobInterstitialAd(this, interstitialAdID)
+            "Reward" -> showAdmobRewardedAd(this, rewardedAdId)
         }
     }
 
@@ -77,14 +89,11 @@ class AdTapMindShow : AppCompatActivity() {
         }
     }
 
-    fun showAdmobInterstitialAd(context: Activity) {
+    fun showAdmobInterstitialAd(context: Activity, adId: String) {
         val adRequest = AdRequest.Builder().build()
 
-        val adID = "ca-app-pub-7450680965442270/1478768049"
-//        val adID = "ca-app-pub-3940256099942544/1033173712"  // <= demo
-
         InterstitialAd.load(
-            context, adID, adRequest,
+            context, adId, adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(ad: InterstitialAd) {
                     Log.d(TAG, "$TAG1 : showAdmobInterstitialAd onAdLoaded")
@@ -149,7 +158,7 @@ class AdTapMindShow : AppCompatActivity() {
         )
     }
 
-    fun showAdmobRewardedAd(context: Context) {
+    fun showAdmobRewardedAd(context: Context, adId: String) {
 
         val adRequest = AdRequest.Builder().build()
 
@@ -157,15 +166,13 @@ class AdTapMindShow : AppCompatActivity() {
 
         RewardedAd.load(
             context,
-            "ca-app-pub-7450680965442270/2233446514",
-//            "ca-app-pub-3940256099942544/5224354917" // <= demo
+            adId,
             adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdLoaded(ad: RewardedAd) {
                     Log.d(TAG, "$TAG1 : showAdmobRewardAd onAdLoaded")
 
                     ad.fullScreenContentCallback = object : FullScreenContentCallback() {
-
                         override fun onAdDismissedFullScreenContent() {
                             super.onAdDismissedFullScreenContent()
                             Log.d(
@@ -218,11 +225,10 @@ class AdTapMindShow : AppCompatActivity() {
     }
 
     fun showAdmobNativeAd(
-        context: Context, nativeAdContainer: FrameLayout
+        context: Context, nativeAdContainer: FrameLayout, adUnitId: String
     ) {
         val adLoader = AdLoader.Builder(
-            context, "ca-app-pub-7450680965442270/8599544313"
-//            context, "ca-app-pub-3940256099942544/2247696110" // <= demo
+            context, adUnitId
         ).forNativeAd { nativeAd ->
             Log.d(TAG, "$TAG1 : showAdmobNativeAd onAdLoaded")
 
@@ -287,9 +293,16 @@ class AdTapMindShow : AppCompatActivity() {
         nativeAdView.starRatingView = unifiedAdBinding.adStars
         nativeAdView.storeView = unifiedAdBinding.adStore
         nativeAdView.advertiserView = unifiedAdBinding.adAdvertiser
-        unifiedAdBinding.adAttribution.text = "Ad"
-        unifiedAdBinding.adAttribution.visibility = View.VISIBLE
+//        unifiedAdBinding.adAttribution.text = "Ad"
+//        unifiedAdBinding.adAttribution.visibility = View.VISIBLE
         unifiedAdBinding.adHeadline.text = nativeAd.headline
+
+        if (nativeAd.adChoicesInfo != null) {
+            unifiedAdBinding.adChoices.visibility = View.VISIBLE
+            unifiedAdBinding.adChoices.text = nativeAd.adChoicesInfo?.text
+        } else {
+            unifiedAdBinding.adChoices.visibility = View.GONE
+        }
 
         nativeAd.mediaContent?.let {
             unifiedAdBinding.adMedia.mediaContent = it
@@ -354,19 +367,17 @@ class AdTapMindShow : AppCompatActivity() {
             unifiedAdBinding.adAdvertiser.visibility = View.GONE
         }
 
-        // ⚠️ CRITICAL: This must be called LAST after all views are populated
         nativeAdView.setNativeAd(nativeAd)
     }
 
-    fun showAdmobBannerAd(context: Context, adContainer: FrameLayout) {
+    fun showAdmobBannerAd(context: Context, adContainer: FrameLayout, adUnitId: String) {
 
         val adView = AdView(context)
-        adView.adUnitId = "ca-app-pub-7450680965442270/1794874535"
-//        adView.adUnitId = "ca-app-pub-3940256099942544/9214589741"
-//        adView.adUnitId = "ca-app-pub-3940256099942544/6300978111" // <= demo
+        adView.adUnitId = adUnitId
         adView.setAdSize(AdSize.BANNER)
         adContainer.removeAllViews()
         adContainer.addView(adView)
+        Log.e(TAG, "showAdmobBannerAd: $adUnitId")
 
         adView.adListener = object : AdListener() {
             override fun onAdClicked() {
@@ -395,7 +406,6 @@ class AdTapMindShow : AppCompatActivity() {
                 Log.d(TAG, "$TAG1 : showAdmobBannerAd onAdOpened")
             }
         }
-
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
     }

@@ -20,7 +20,6 @@ import com.facebook.ads.NativeAdListener
 
 class Facebook {
 
-
     val TAG = "APP@@@"
     val TAG1 = "Admob"
 
