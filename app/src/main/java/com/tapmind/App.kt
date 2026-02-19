@@ -15,6 +15,8 @@ import com.unity3d.mediation.LevelPlayInitRequest
 class App : Application() {
 
     private val TAG = "APP@@@"
+    private var flow: String = "Admob"
+//    private var flow : String = "ironsource"
 
     companion object {
         @Volatile
@@ -24,42 +26,48 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Admob().init(this)
-//        val apiKey = "2517ad13d"
-//        val userId = Settings.Secure.getString(
-//            contentResolver,
-//            Settings.Secure.ANDROID_ID
-//        )
+        if (flow == "Admob") {
+            Admob().init(this)
+        } else if (flow == "ironsource") {
+            val apiKey = "2517ad13d"
+            val userId = Settings.Secure.getString(
+                contentResolver, Settings.Secure.ANDROID_ID
+            )
 
-//        val initRequest = LevelPlayInitRequest.Builder(apiKey)
-//            .withUserId(userId)
-//            .build()
-//        LevelPlay.init(this, initRequest, object : LevelPlayInitListener {
-//            override fun onInitFailed(error: LevelPlayInitError) {
-//                isIronSourceInitialized = false
-//                Log.e("App@@@", "onInitFailed: IronSource")
-//                Handler(Looper.getMainLooper()).post {
-//                    Toast.makeText(
-//                        applicationContext,
-//                        "IronSource init failed",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
+            val initRequest = LevelPlayInitRequest.Builder(apiKey).withUserId(userId).build()
+            LevelPlay.init(this, initRequest, object : LevelPlayInitListener {
+                override fun onInitFailed(error: LevelPlayInitError) {
+                    isIronSourceInitialized = false
+                    Log.e(TAG, "onInitFailed: IronSource")
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(
+                            applicationContext, "IronSource init failed", Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onInitSuccess(configuration: LevelPlayConfiguration) {
+                    isIronSourceInitialized = true
+                    Log.e(TAG, "onInitSuccess: IronSource")
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(
+                            applicationContext,
+                            "IronSource initialized successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            })
+        }
+
+//        val context: Context = this
+//        MobileAds.initialize(context) { status ->
+//            for ((adapter, state) in status.adapterStatusMap) {
+//                Log.d(TAG, "Adapter: $adapter, status: ${state.description}")
 //            }
+//        }
 //
-//            override fun onInitSuccess(configuration: LevelPlayConfiguration) {
-//                isIronSourceInitialized = true
-//                Log.e("App@@@", "onInitSuccess: IronSource")
-//                Handler(Looper.getMainLooper()).post {
-//                    Toast.makeText(
-//                        applicationContext,
-//                        "IronSource initialized successfully",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//        })
-//        verifyCustomAdapter()
+        verifyCustomAdapter()
 
 //        Facebook().init(this)
 //        init(this)
@@ -101,7 +109,8 @@ class App : Application() {
     private fun verifyCustomAdapter() {
         try {
             val adapterClass =
-                Class.forName("com.ironsource.adapters.custom.tapmind.TapMindCustomAdapter")
+//                Class.forName("com.ironsource.adapters.custom.tapmind.TapMindCustomAdapter")
+                Class.forName("com.tapmimd.ads.mediation.adapter.TapMindAdapterAdmob")
             Log.d(TAG, "✓ Custom TapMind adapter found in classpath")
             Log.d(TAG, "  Class: ${adapterClass.name}")
         } catch (_: ClassNotFoundException) {

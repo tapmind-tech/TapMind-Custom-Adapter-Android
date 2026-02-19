@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".App"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -32,8 +34,6 @@
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
@@ -43,15 +43,14 @@
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.ads.ADAPTER_SCOPE"
-            android:value="all" /> <!-- <meta-data -->
+<!--        <meta-data-->
+<!--            android:name="com.google.android.gms.ads.ADAPTER_SCOPE"-->
+<!--            android:value="all" />-->
+        <!-- <meta-data -->
         <!-- android:name="com.google.android.gms.ads.META" -->
         <!-- android:value="banner"/> -->
         <!-- <meta-data -->
@@ -59,14 +58,14 @@
         <!-- android:value="com.applovin.mediation.adapters.MediationAdapterBase" /> -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7450680965442270~4894970152" /> <!-- <meta-data -->
+            android:value="ca-app-pub-2967653914154128~6462247083" />
         <!-- android:name="com.tapmimd.ads.mediation.adapter.TapMindsMediationAdapter" -->
         <!-- android:value="com.applovin.mediation.adapters.TapMindsMediationAdapter" /> -->
-        <activity
-            android:name="com.ironsource.sdk.controller.ControllerActivity"
-            android:configChanges="orientation|screenSize"
-            android:hardwareAccelerated="true"
-            android:theme="@android:style/Theme.NoTitleBar" />
+<!--        <activity-->
+<!--            android:name="com.ironsource.sdk.controller.ControllerActivity"-->
+<!--            android:configChanges="orientation|screenSize"-->
+<!--            android:hardwareAccelerated="true"-->
+<!--            android:theme="@android:style/Theme.NoTitleBar" />-->
 <!--        <activity-->
 <!--            android:name="com.ironsource.sdk.controller.InterstitialActivity"-->
 <!--            android:configChanges="orientation|screenSize"-->
@@ -77,15 +76,15 @@
 <!--            android:configChanges="orientation|screenSize"-->
 <!--            android:hardwareAccelerated="true"-->
 <!--            android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-        <activity
-            android:name="com.ironsource.mediationsdk.testSuite.TestSuiteActivity"
-            android:configChanges="orientation|screenSize"
-            android:hardwareAccelerated="true"
-            android:theme="@android:style/Theme.NoTitleBar" />
+<!--        <activity-->
+<!--            android:name="com.ironsource.mediationsdk.testSuite.TestSuiteActivity"-->
+<!--            android:configChanges="orientation|screenSize"-->
+<!--            android:hardwareAccelerated="true"-->
+<!--            android:theme="@android:style/Theme.NoTitleBar" />-->
 
-        <provider
-            android:name="com.ironsource.lifecycle.IronsourceLifecycleProvider"
-            android:authorities="${applicationId}.IronsourceLifecycleProvider" />
+<!--        <provider-->
+<!--            android:name="com.ironsource.lifecycle.IronsourceLifecycleProvider"-->
+<!--            android:authorities="${applicationId}.IronsourceLifecycleProvider" />-->
     </application>
 
 </manifest>

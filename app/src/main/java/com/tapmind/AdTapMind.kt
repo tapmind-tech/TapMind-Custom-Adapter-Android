@@ -5,19 +5,25 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tapmind.databinding.ActivityAdTapMindBinding
 
 class AdTapMind : AppCompatActivity() {
     private lateinit var binding: ActivityAdTapMindBinding
+    private var flow: String = "Admob"
+//    private var flow : String = "ironsource"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAdTapMindBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (flow == "ironsource") {
+            binding.admobNative.visibility = View.GONE
+            checkInitAndEnableButtons()
+        }
         clickListener()
-//        checkInitAndEnableButtons()
     }
 
     private fun clickListener() {
@@ -44,9 +50,10 @@ class AdTapMind : AppCompatActivity() {
             override fun run() {
                 if (App.isIronSourceInitialized) {
                     binding.progressBar.visibility = View.GONE
-//                    navigation("Banner")
+                    binding.admobNative.visibility = View.GONE
                 } else {
                     binding.progressBar.visibility = View.VISIBLE
+//                    binding.admobNative.visibility = View.VISIBLE
                     handler.postDelayed(this, 300)
                 }
             }
@@ -54,12 +61,15 @@ class AdTapMind : AppCompatActivity() {
     }
 
     private fun navigation(value: String) {
-//        if (!App.isIronSourceInitialized) {
-//            Toast.makeText(this, "IronSource not initialized yet", Toast.LENGTH_SHORT).show()
-//            return
-//        }
+        if (flow == "ironsource") {
+            if (!App.isIronSourceInitialized) {
+                Toast.makeText(this, "IronSource not initialized yet", Toast.LENGTH_SHORT).show()
+                return
+            }
+        }
         val intent = Intent(this, AdTapMindShow::class.java)
         intent.putExtra("adType", value)
+        intent.putExtra("flow", flow)
         startActivity(intent)
     }
 }
