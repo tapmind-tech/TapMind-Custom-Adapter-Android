@@ -115,7 +115,6 @@ class AppLovinMax {
             override fun onAdLoaded(p0: MaxAd) {
                 progressBar.visibility = View.GONE
                 Log.d(TAG, "Applovin Banner : onAdLoaded ")
-
             }
 
             override fun onAdDisplayed(p0: MaxAd) {

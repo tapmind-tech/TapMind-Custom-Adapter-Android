@@ -41,13 +41,12 @@ class MainActivity2 : AppCompatActivity() {
         ironsource = Ironsource()
 //        tapMinds.init(activity)
 
-        loader = findViewById<ProgressBar>(R.id.loader)
-        adContainer = findViewById<FrameLayout>(R.id.adContainer)
+        loader = findViewById(R.id.loader)
+        adContainer = findViewById(R.id.adContainer)
 
         findViewById<MaterialButton>(R.id.admobBanner).setOnClickListener{
             admob.showAdmobBannerAd(activity,loader,adContainer)
         }
-
 
         findViewById<MaterialButton>(R.id.admobNative).setOnClickListener{
             admob.showAdmobNativeAd(activity,loader,adContainer)
