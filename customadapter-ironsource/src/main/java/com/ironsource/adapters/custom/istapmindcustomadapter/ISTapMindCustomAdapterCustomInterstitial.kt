@@ -62,8 +62,6 @@ class ISTapMindCustomAdapterCustomInterstitial(networkSettings: NetworkSettings)
             country = country,
             packageName = appData.packageName,
             adapterName = "ISTapMindCustomAdapterCustomAdapter",
-            continent = geo.continent,
-            region = geo.region
         )
 
         Log.e(TAG, "loadAd playLoad: $playLoad")

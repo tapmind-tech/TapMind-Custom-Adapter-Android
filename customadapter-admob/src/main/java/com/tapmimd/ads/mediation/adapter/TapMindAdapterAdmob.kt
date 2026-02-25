@@ -114,8 +114,6 @@ class TapMindAdapterAdmob : Adapter() {
             country = country,
             packageName = appData.packageName,
             adapterName = "TapMindAdapterAdmob",
-            continent = geo.continent,
-            region = geo.region
         )
         val data = AdmobBannerCustomEventLoader(adConfig, callback)
         data.loadAdd()
@@ -147,8 +145,6 @@ class TapMindAdapterAdmob : Adapter() {
             country = country,
             packageName = appData.packageName,
             "TapMindAdapterAdmob",
-            continent = geo.continent,
-            region = geo.region
         )
         AdmobNativeCustomEventLoader(adConfig, callback).loadAd()
     }
@@ -181,8 +177,6 @@ class TapMindAdapterAdmob : Adapter() {
             country = country,
             packageName = appData.packageName,
             "TapMindAdapterAdmob",
-            continent = geo.continent,
-            region = geo.region
         )
 
         AdmobInterstitialCustomEventLoader(adConfig, callback).loadAd()
@@ -213,8 +207,6 @@ class TapMindAdapterAdmob : Adapter() {
             country = country,
             packageName = appData.packageName,
             "TapMindAdapterAdmob",
-            continent = geo.continent,
-            region = geo.region
         )
         Log.d(TAG, "$TAG1 loadAppOpenAd")
     }
@@ -245,8 +237,6 @@ class TapMindAdapterAdmob : Adapter() {
             country = country,
             packageName = appData.packageName,
             "TapMindAdapterAdmob",
-            continent = geo.continent,
-            region = geo.region
         )
         AdmobRewardedCustomEventLoader(adConfig, callback).loadAd()
     }
@@ -276,8 +266,6 @@ class TapMindAdapterAdmob : Adapter() {
             country = country,
             packageName = appData.packageName,
             "TapMindAdapterAdmob",
-            continent = geo.continent,
-            region = geo.region
         )
         Log.d(TAG, "$TAG1 loadRewardedInterstitialAd")
     }

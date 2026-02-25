@@ -65,8 +65,6 @@ class ISTapMindCustomAdapterCustomRewardedVideo(networkSettings: NetworkSettings
             country = country,
             packageName = appData.packageName,
             adapterName = "ISTapMindCustomAdapterCustomAdapter",
-            continent = geo.continent,
-            region = geo.region
         )
 
         request = object : TapMindAdapterResponseParameters {

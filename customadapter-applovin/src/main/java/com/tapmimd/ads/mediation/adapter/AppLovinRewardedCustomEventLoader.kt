@@ -120,8 +120,6 @@ class AppLovinRewardedCustomEventLoader private constructor(
                 country = country,
                 packageName = appData.packageName,
                 "AppLovinRewardedCustomEventLoader",
-                continent = geo.continent,
-                region = geo.region
             )
 
             tapMindRewardedAdapterListener = object : TapMindRewardedAdapterListener {

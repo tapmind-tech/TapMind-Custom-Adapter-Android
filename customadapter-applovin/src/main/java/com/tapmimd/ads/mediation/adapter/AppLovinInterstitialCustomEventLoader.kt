@@ -98,8 +98,6 @@ class AppLovinInterstitialCustomEventLoader private constructor(
                 country = country,
                 packageName = appData.packageName,
                 "AppLovinInterstitialCustomEventLoader",
-                continent = geo.continent,
-                region = geo.region
             )
 
             tapMindInterstitialAdapterListener = object : TapMindInterstitialAdapterListener {

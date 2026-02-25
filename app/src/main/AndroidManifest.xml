@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".App"
@@ -48,9 +48,9 @@
             <!-- </intent-filter> -->
         </activity>
 
-<!--        <meta-data-->
-<!--            android:name="com.google.android.gms.ads.ADAPTER_SCOPE"-->
-<!--            android:value="all" />-->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.android.gms.ads.ADAPTER_SCOPE"-->
+        <!--            android:value="all" />-->
         <!-- <meta-data -->
         <!-- android:name="com.google.android.gms.ads.META" -->
         <!-- android:value="banner"/> -->
@@ -61,41 +61,46 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-2967653914154128~6462247083" />
 
-<!--        <meta-data-->
-<!--            android:name="applovin.sdk.application_id"-->
-<!--            android:value="iIqgM0gm6T2PNNT_gMWAs7CCUaTgf80tqmTxfQOc6TtOn5rSmkSA3h79SGxTS0fkGw6zbDhvZLve_hnfd9eDeX"/>-->
+        <!--        <meta-data-->
+        <!--            android:name="applovin.sdk.application_id"-->
+        <!--            android:value="iIqgM0gm6T2PNNT_gMWAs7CCUaTgf80tqmTxfQOc6TtOn5rSmkSA3h79SGxTS0fkGw6zbDhvZLve_hnfd9eDeX"/>-->
 
-<!--        <meta-data-->
-<!--         android:name="com.tapmind.ads.mediation.adapter.TapMindsMediationAdapter"-->
-<!--         android:value="com.applovin.mediation.adapters.TapMindsMediationAdapter" />-->
+        <!--        <meta-data-->
+        <!--         android:name="com.tapmind.ads.mediation.adapter.TapMindsMediationAdapter"-->
+        <!--         android:value="com.applovin.mediation.adapters.TapMindsMediationAdapter" />-->
         <meta-data
             android:name="com.tapminds.ads.mediation.adapter.TapMindsMediationAdapter"
             android:value="com.tapminds.ads.mediation.applovin.TapMindsMediationAdapter" />
 
-        <!--        <activity-->
-<!--            android:name="com.ironsource.sdk.controller.ControllerActivity"-->
-<!--            android:configChanges="orientation|screenSize"-->
-<!--            android:hardwareAccelerated="true"-->
-<!--            android:theme="@android:style/Theme.NoTitleBar" />-->
-<!--        <activity-->
-<!--            android:name="com.ironsource.sdk.controller.InterstitialActivity"-->
-<!--            android:configChanges="orientation|screenSize"-->
-<!--            android:hardwareAccelerated="true"-->
-<!--            android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-<!--        <activity-->
-<!--            android:name="com.ironsource.sdk.controller.OpenUrlActivity"-->
-<!--            android:configChanges="orientation|screenSize"-->
-<!--            android:hardwareAccelerated="true"-->
-<!--            android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-<!--        <activity-->
-<!--            android:name="com.ironsource.mediationsdk.testSuite.TestSuiteActivity"-->
-<!--            android:configChanges="orientation|screenSize"-->
-<!--            android:hardwareAccelerated="true"-->
-<!--            android:theme="@android:style/Theme.NoTitleBar" />-->
+        <activity
+            android:name="com.tapmimd.ads.meditation.adapter.TapMindAdapterApplovin"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Streamlyn" />
 
-<!--        <provider-->
-<!--            android:name="com.ironsource.lifecycle.IronsourceLifecycleProvider"-->
-<!--            android:authorities="${applicationId}.IronsourceLifecycleProvider" />-->
+        <!--        <activity-->
+        <!--            android:name="com.ironsource.sdk.controller.ControllerActivity"-->
+        <!--            android:configChanges="orientation|screenSize"-->
+        <!--            android:hardwareAccelerated="true"-->
+        <!--            android:theme="@android:style/Theme.NoTitleBar" />-->
+        <!--        <activity-->
+        <!--            android:name="com.ironsource.sdk.controller.InterstitialActivity"-->
+        <!--            android:configChanges="orientation|screenSize"-->
+        <!--            android:hardwareAccelerated="true"-->
+        <!--            android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
+        <!--        <activity-->
+        <!--            android:name="com.ironsource.sdk.controller.OpenUrlActivity"-->
+        <!--            android:configChanges="orientation|screenSize"-->
+        <!--            android:hardwareAccelerated="true"-->
+        <!--            android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
+        <!--        <activity-->
+        <!--            android:name="com.ironsource.mediationsdk.testSuite.TestSuiteActivity"-->
+        <!--            android:configChanges="orientation|screenSize"-->
+        <!--            android:hardwareAccelerated="true"-->
+        <!--            android:theme="@android:style/Theme.NoTitleBar" />-->
+
+        <!--        <provider-->
+        <!--            android:name="com.ironsource.lifecycle.IronsourceLifecycleProvider"-->
+        <!--            android:authorities="${applicationId}.IronsourceLifecycleProvider" />-->
     </application>
 
 </manifest>

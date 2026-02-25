@@ -88,8 +88,6 @@ class AppLovinBannerCustomEventLoader private constructor(
                 country = country,
                 packageName = appData.packageName,
                 "AppLovinBannerCustomEventLoader",
-                continent = geo.continent,
-                region = geo.region
             )
 
             TapMindsMediationAdapter.getInstance().loadAdViewAd(
