@@ -180,6 +180,12 @@
 -keep class com.applovin.** { *; }
 -dontwarn com.applovin.**
 
+# Keep your custom TapMind adapter
+-keep class com.tapmimd.ads.mediation.adapter.TapMindAdapterApplovin { *; }
+-keep class com.tapmimd.ads.mediation.adapter.** { *; }
+-keepnames class com.tapmimd.ads.mediation.adapter.**
+
+
 # Keep mediation adapters (AppLovin, AdMob, Facebook, Unity, etc.)
 -keep class com.applovin.mediation.adapters.** { *; }
 -dontwarn com.applovin.mediation.adapters.**
