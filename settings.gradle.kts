@@ -26,7 +26,7 @@ dependencyResolutionManagement {
 rootProject.name = "TapMind"
 include(":app")
 include(":TapMindSdk")
-include(":customadapter-facebook")
+//include(":customadapter-facebook")
 include(":customadapter-admob")
-include(":customadapter-ironsource")
-include(":customadapter-applovin")
+//include(":customadapter-ironsource")
+//include(":customadapter-applovin")

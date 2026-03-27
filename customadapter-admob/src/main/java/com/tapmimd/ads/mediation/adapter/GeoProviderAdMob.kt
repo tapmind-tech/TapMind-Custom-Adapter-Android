@@ -204,7 +204,7 @@ object GeoProviderAdMob {
         }
     }
 
-    const val sdkVersion = "1.0.26"
+    const val sdkVersion = "1.0.27"
 }
 
 data class AppInfoAdMob(
