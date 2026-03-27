@@ -9,8 +9,8 @@ import android.widget.Toast
 import com.applovin.sdk.AppLovinMediationProvider
 import com.applovin.sdk.AppLovinSdk
 import com.applovin.sdk.AppLovinSdkInitializationConfiguration
+import com.applovin.sdk.AppLovinSdkUtils.runOnUiThread
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
-import com.tapminds.tapmindsads.TapmindsSdkUtils.runOnUiThread
 import com.unity3d.mediation.LevelPlay
 import com.unity3d.mediation.LevelPlayConfiguration
 import com.unity3d.mediation.LevelPlayInitError
