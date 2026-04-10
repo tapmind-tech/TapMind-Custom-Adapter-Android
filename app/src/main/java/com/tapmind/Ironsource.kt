@@ -29,7 +29,6 @@ import com.unity3d.mediation.rewarded.LevelPlayReward
 import com.unity3d.mediation.rewarded.LevelPlayRewardedAd
 import com.unity3d.mediation.rewarded.LevelPlayRewardedAdListener
 
-
 class Ironsource {
 
     private val TAG = "App@@@"
@@ -114,10 +113,10 @@ class Ironsource {
     fun showIronsourceRewardedAd(context: Context, progressBar: ProgressBar) {
         val mRewardedAd = LevelPlayRewardedAd(IRONSOURCE_REWARDED_AD_UNIT_ID)
         mRewardedAd.setListener(object : LevelPlayRewardedAdListener {
-
             override fun onAdLoaded(p0: LevelPlayAdInfo) {
                 Log.d(TAG, "LevelPlay Rewarded : onAdLoaded")
                 progressBar.visibility = View.GONE
+//
                 if (mRewardedAd.isAdReady) {
                     mRewardedAd.showAd(context as Activity)
                 }
