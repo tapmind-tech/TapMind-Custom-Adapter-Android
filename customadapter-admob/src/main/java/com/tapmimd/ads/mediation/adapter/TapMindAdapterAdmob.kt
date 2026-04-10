@@ -272,7 +272,9 @@ class TapMindAdapterAdmob : Adapter() {
         return runCatching {
             Log.e(TAG, "getPlacement: $serverParameters")
 
-            serverParameters?.getString("parameter")?.let { param ->
+            val param = serverParameters?.getString("parameter")
+
+            if (!param.isNullOrBlank()) {
                 val json = JSONObject(param)
 
                 val keyMap = json.keys().asSequence().associateBy { it.lowercase() }
@@ -304,8 +306,7 @@ class TapMindAdapterAdmob : Adapter() {
             }
 
             val label = serverParameters?.getString("label")
-                ?.takeIf { it.isNotEmpty() }
-
+                ?: serverParameters?.getString("lable")
             if (!label.isNullOrEmpty()) {
                 return@runCatching PlacementInfoAdmob(
                     placementName = label,
